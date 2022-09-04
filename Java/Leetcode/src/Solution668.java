@@ -1,5 +1,3 @@
-import com.sun.jmx.snmp.SnmpNull;
-
 /*
 NO668 乘法表中第K小的数
 几乎每一个人都用 乘法表。但是你能在乘法表中快速找到第k小的数字吗？

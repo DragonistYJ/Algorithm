@@ -1,9 +1,5 @@
-import javafx.util.Pair;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
+import java.util.AbstractMap.SimpleEntry;
 
 /*
 NO127 单词接龙
@@ -23,10 +19,10 @@ public class Solution127 {
         while (wordList.contains(beginWord)) {
             wordList.remove(beginWord);
         }
-        List<Pair<String, Integer>> queue = new LinkedList<>();
-        queue.add(new Pair<>(beginWord, 1));
+        List<SimpleEntry<String, Integer>> queue = new LinkedList<>();
+        queue.add(new SimpleEntry<>(beginWord, 1));
         while (!queue.isEmpty()) {
-            Pair<String, Integer> pair = queue.get(0);
+            SimpleEntry<String, Integer> pair = queue.get(0);
             queue.remove(0);
             String word = pair.getKey();
             Integer length = pair.getValue();
@@ -35,7 +31,7 @@ public class Solution127 {
             int index = 0;
             while (index < wordList.size()) {
                 if (connectable(word, wordList.get(index))) {
-                    queue.add(new Pair<>(wordList.get(index), length + 1));
+                    queue.add(new SimpleEntry<>(wordList.get(index), length + 1));
                     wordList.remove(index);
                 } else {
                     index += 1;
@@ -59,7 +55,6 @@ public class Solution127 {
     }
 
     public static void main(String[] args) {
-
         System.out.println(new Solution127().ladderLength("hit", "cog", new ArrayList<>(Arrays.asList("hot", "dot", "dog", "lot", "log", "cog"))));
     }
 }

@@ -1,7 +1,6 @@
-import javafx.util.Pair;
-
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.AbstractMap.SimpleEntry;
 
 /*
 NO135 分发糖果
@@ -15,18 +14,13 @@ public class Solution135 {
     public int candy(int[] ratings) {
         int n = ratings.length;
         if (n == 1) return 1;
-        ArrayList<Pair<Integer, Integer>> arrayList = new ArrayList<>(n);
+        ArrayList<SimpleEntry<Integer, Integer>> arrayList = new ArrayList<>(n);
         for (int i = 0; i < n; i++) {
-            arrayList.add(new Pair<>(ratings[i], i));
+            arrayList.add(new SimpleEntry<>(ratings[i], i));
         }
-        arrayList.sort(new Comparator<Pair<Integer, Integer>>() {
-            @Override
-            public int compare(Pair<Integer, Integer> o1, Pair<Integer, Integer> o2) {
-                return o1.getKey() - o2.getKey();
-            }
-        });
+        arrayList.sort(Comparator.comparingInt(SimpleEntry::getKey));
         int[] candies = new int[n];
-        for (Pair<Integer, Integer> pair : arrayList) {
+        for (SimpleEntry<Integer, Integer> pair : arrayList) {
             int index = pair.getValue();
             if (index == 0) {
                 if (ratings[0] > ratings[1]) {
