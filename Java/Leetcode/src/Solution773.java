@@ -1,6 +1,5 @@
-import javafx.util.Pair;
-
 import java.util.*;
+import java.util.AbstractMap.SimpleEntry;
 
 /*
 NO773 滑动谜题
@@ -12,7 +11,7 @@ NO773 滑动谜题
 public class Solution773 {
     public int slidingPuzzle(int[][] board) {
         Set<String> set = new HashSet<>();
-        List<Pair<String, Integer>> queue = new LinkedList<>();
+        List<SimpleEntry<String, Integer>> queue = new LinkedList<>();
         int x = 0;
         String s = "";
         for (int[] ints : board) {
@@ -22,11 +21,11 @@ public class Solution773 {
         }
         if (board[0][0] == 0) s = "0" + x;
         else s = String.valueOf(x);
-        queue.add(new Pair<>(s, 0));
+        queue.add(new SimpleEntry<>(s, 0));
         set.add(s);
 
         while (!queue.isEmpty()) {
-            Pair<String, Integer> pair = queue.get(0);
+            SimpleEntry<String, Integer> pair = queue.get(0);
             queue.remove(0);
             String key = pair.getKey();
             Integer step = pair.getValue();
@@ -34,7 +33,7 @@ public class Solution773 {
             List<String> moves = move(key);
             for (String move : moves) {
                 if (set.contains(move)) continue;
-                queue.add(new Pair<>(move, step + 1));
+                queue.add(new SimpleEntry<>(move, step + 1));
                 set.add(move);
             }
         }
