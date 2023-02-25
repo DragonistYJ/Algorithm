@@ -1,5 +1,8 @@
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.StreamTokenizer;
 import java.util.ArrayDeque;
-import java.util.Scanner;
 
 /**
  * @author 11214
@@ -58,16 +61,19 @@ public class Solution957C {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Node root = new Node();
         root.parent = root;
         root.fail = root;
 
-        Scanner sc = new Scanner(System.in);
-        String target = sc.next();
-        int n = sc.nextInt();
+        StreamTokenizer st = new StreamTokenizer(new InputStreamReader(System.in));
+        st.nextToken();
+        String target = st.sval;
+        st.nextToken();
+        int n = (int) st.nval;
         for (int i = 0; i < n; i++) {
-            Node.addWord(root, sc.next());
+            st.nextToken();
+            Node.addWord(root, st.sval);
         }
         Node.makeFail(root);
 
@@ -100,9 +106,12 @@ public class Solution957C {
             }
         }
 
+        OutputStreamWriter writer = new OutputStreamWriter(System.out);
         for (int i = 0; i < top; i++) {
-            System.out.print((char) (chars[i] + 'a'));
+            writer.write((char) (chars[i] + 'a'));
         }
-        System.out.println();
+        writer.write("\n");
+        writer.flush();
+        writer.close();
     }
 }
